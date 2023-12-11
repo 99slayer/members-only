@@ -7,18 +7,20 @@ const messageController = require('../controllers/messageController');
 
 // INDEX
 router.get('/', indexController.index);
+router.post('/', indexController.sign_in);
+router.get('/signout', indexController.sign_out);
 
 // USER
-router.get('/user/detail', userController.user_detail);
-router.get('/users', userController.user_list);
-
 router.get('/user/create', userController.user_create_get);
 router.post('/user/create', userController.user_create_post);
+
+router.get('/user/:id', userController.user_detail);
+router.get('/users', userController.user_list);
 
 // MESSAGE
 router.get('/messages', messageController.message_list);
 
-router.get('/message/create', messageController.message_create_get);
-router.post('/message/create', messageController.message_create_post);
+router.post('/messages/password', messageController.messages_post_pass);
+router.post('/messages/message', messageController.messages_post_message);
 
 module.exports = router;
