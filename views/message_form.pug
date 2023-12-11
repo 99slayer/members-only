@@ -1,0 +1,32 @@
+extends message_list
+
+block form
+	if !user
+		p You are not signed up.
+	else if !user.membership_status
+		form(action='/messages/password' method='post' id='secret-password-form') 
+			div(class='form-group')
+				label(for='secret-password') 
+				input(type='text' class='form-control' name='secret-password' placeholder='Secret Placeholder' required)
+
+			button(type='submit') Submit
+
+	else 
+		form(action='/messages/message' method='post' id='message-form')
+			div(class='form-group')
+				label(for='text')
+				textarea(
+					class='form-control'
+					placeholder='Message'
+					name='text'
+					cols='40'
+					rows='8'
+					value=(undefined === text ? '' : text)
+				)
+
+			button(type='submit') SEND
+
+	if errors 
+		ul 
+			each error in errors 
+				li= error.msg 

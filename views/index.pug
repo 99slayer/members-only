@@ -1,5 +1,22 @@
 extends layout
 
 block content
-  h1= title
-  p Welcome to #{title}
+
+	if user
+		button(type='button')
+			a(href='/signout') Sign Out
+
+	else 
+		h2 Login
+		form(action='/' method='post' id='signin-form')
+			div(class='form-group')
+				label(for='username')
+				input(type='text' class='form-control' placeholder='Username' name='username' value='')
+			div(class='form-group')
+				label(for='password')
+				input(type='text' class='form-control' placeholder='Password' name='password' value='')
+
+			button(type='submit') Sign In
+
+		button(type='button')
+			a(href='/user/create') Sign Up

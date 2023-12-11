@@ -1,0 +1,10 @@
+extends layout 
+
+block content 
+	h2= title 
+
+	ul 
+		each user in users 
+			li(style='display: flex; gap: 4px;')
+				a(href= user.url)= user.username
+				p= user.fullname

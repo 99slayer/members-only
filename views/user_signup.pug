@@ -1,0 +1,64 @@
+extends layout
+
+block content
+
+	h2= title
+	form(action='' method='post' id='signup-form')
+		div(class='form-group')
+			label(for='firstname')
+			input(
+				type='text'
+				class='form-control'
+				placeholder='First Name'
+				name='firstname'
+				value=(undefined === user ? '' : user.firstname)
+				required
+			)
+		div(class='form-group')
+			label(for='lastname')
+			input(
+				type='text'
+				class='form-control'
+				placeholder='Last Name'
+				name='lastname'
+				value=(undefined === user ? '' : user.lastname)
+				required
+			)
+		div(class='form-group')
+			label(for='username')
+			input(
+				type='text'
+				class='form-control'
+				placeholder='Username'
+				name='username'
+				value=(undefined === user ? '' : user.username)
+				required
+			)
+		div(class='form-group')
+			label(for='password')
+			input(
+				type='text'
+				class='form-control'
+				placeholder='Password'
+				name='password'
+				value=(undefined === user ? '' : user.password)
+				required
+			)
+		div(class='form-group')
+			label(for='password-confirm')
+			input(
+				type='text'
+				class='form-control'
+				placeholder='Confirm Password'
+				name='password-confirm'
+				value=''
+				required
+			)
+			
+		button(type='submit') Sign Up
+
+	if errors
+		br
+		ul
+			for error in errors
+				li!= `${error.path}: ${error.msg}`

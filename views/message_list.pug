@@ -1,0 +1,12 @@
+extends layout 
+
+block content
+	ul
+		each message in messages
+			li
+				div
+					p= message.creator.username
+					p= message.timestamp
+				p= message.text
+
+		block form

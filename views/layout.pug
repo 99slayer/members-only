@@ -1,7 +1,14 @@
 doctype html
 html
-  head
-    title= title
-    link(rel='stylesheet', href='/stylesheets/style.css')
-  body
-    block content
+	head
+		title= title
+		link(rel='stylesheet', href='/stylesheets/style.css')
+	body
+		header(id='page-header')
+			a(href='/' style='text-decoration: none; margin-right: 20px;') LOGO
+			button(type='button')
+				a(href='/messages') POSTS
+			button(type='button')
+				a(href='/users') USERS
+
+		block content
