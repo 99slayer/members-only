@@ -1,13 +1,16 @@
-var createError = require('http-errors');
-var express = require('express');
-var path = require('path');
-var cookieParser = require('cookie-parser');
-var logger = require('morgan');
+const createError = require('http-errors');
+const express = require('express');
+const path = require('path');
+const session = require('express-session');
+const passport = require('passport');
+const initPassport = require('./passportConfig');
+const cookieParser = require('cookie-parser');
+const logger = require('morgan');
 require('dotenv').config();
 
 const indexRouter = require('./routes/index');
 
-var app = express();
+const app = express();
 
 // Set up mongoose connection
 const mongoose = require('mongoose');
@@ -19,9 +22,19 @@ async function main() {
 	await mongoose.connect(mongoDB);
 }
 
+initPassport(passport);
+
 // view engine setup
 app.set('views', path.join(__dirname, 'views'));
 app.set('view engine', 'pug');
+
+app.use(session({
+	secret: 'env var',
+	resave: false,
+	saveUninitialized: false,
+}));
+app.use(passport.initialize());
+app.use(passport.session());
 
 app.use(logger('dev'));
 app.use(express.json());
