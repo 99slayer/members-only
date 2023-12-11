@@ -2,11 +2,11 @@ const mongoose = require('mongoose');
 const Schema = mongoose.Schema;
 
 const UserSchema = new Schema({
-	firstname: { type: String },
-	lastname: { type: String },
-	username: { type: String },
-	password: { type: String },
-	membershipStatus: { type: Boolean },
+	firstname: { type: String, required: true },
+	lastname: { type: String, required: true },
+	username: { type: String, required: true },
+	password: { type: String, required: true },
+	membership_status: { type: Boolean, default: false },
 });
 
 UserSchema.virtual('fullname').get(function () {
@@ -14,7 +14,7 @@ UserSchema.virtual('fullname').get(function () {
 });
 
 UserSchema.virtual('url').get(function () {
-	return 'placeholder';
+	return `/user/${this._id}`;
 });
 
 module.exports = mongoose.model('User', UserSchema);
