@@ -1,6 +1,7 @@
 const User = require('../models/user');
 const asyncHandler = require('express-async-handler');
 const { body, validationResult } = require('express-validator');
+const bcrypt = require('bcryptjs');
 
 exports.user_detail = asyncHandler(async (req, res, next) => {
 	const user = await User.findById(req.params.id).exec();
@@ -67,23 +68,27 @@ exports.user_create_post = [
 	asyncHandler(async (req, res, next) => {
 		const errors = validationResult(req);
 
-		const user = new User({
-			firstname: req.body.firstname,
-			lastname: req.body.lastname,
-			username: req.body.username,
-			password: req.body.password,
-		});
-
-		if (!errors.isEmpty()) {
-			res.render('user_signup', {
-				title: 'signup',
-				user: user,
-				errors: errors.array(),
+		bcrypt.hash(req.body.password, 10, async (err, hashedPswd) => {
+			const user = new User({
+				firstname: req.body.firstname,
+				lastname: req.body.lastname,
+				username: req.body.username,
+				password: req.body.password
 			});
-			return;
-		} else {
-			await user.save();
-			res.redirect(user.url);
-		}
+
+			if (!errors.isEmpty()) {
+				res.render('user_signup', {
+					title: 'signup',
+					user: user,
+					errors: errors.array(),
+				});
+				return;
+			} else {
+				user.set({ password: hashedPswd });
+				await user.save();
+
+				res.redirect(user.url);
+			}
+		});
 	})
 ];
