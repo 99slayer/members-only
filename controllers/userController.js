@@ -44,7 +44,16 @@ exports.user_create_post = [
 		.custom(innerWhitespace)
 		.isLength({ min: 3, max: 30 })
 		.withMessage('Must be 3-30 characters long.')
-		.escape(),
+		.escape()
+		.custom(async (value, { req }) => {
+			// Checks for duplicate usernames.
+			const foundUsers = await User.find({ username: req.body.username });
+
+			if (foundUsers.length > 0) {
+				throw new Error('That username already exists.');
+			}
+			return true;
+		}),
 	body('password')
 		.trim()
 		.custom(innerWhitespace)
@@ -55,6 +64,7 @@ exports.user_create_post = [
 		.trim()
 		.custom(innerWhitespace)
 		.custom((value, { req }) => {
+			// Makes sure both password fields match.
 			if (value !== req.body.password) {
 				throw new Error('Passwords must match.');
 			}
@@ -87,7 +97,12 @@ exports.user_create_post = [
 				user.set({ password: hashedPswd });
 				await user.save();
 
-				res.redirect(user.url);
+				req.login(user, (err) => {
+					if (err) {
+						return next(err);
+					}
+					return res.redirect(user.url);
+				});
 			}
 		});
 	})
