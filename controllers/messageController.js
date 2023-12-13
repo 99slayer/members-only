@@ -5,9 +5,8 @@ const { body, validationResult } = require('express-validator');
 
 exports.message_list = asyncHandler(async (req, res, next) => {
 	const messages = await Message.find({}).populate('creator').exec();
-
 	res.render('message_form', {
-		title: 'messages',
+		title: 'POSTS',
 		messages: messages,
 		user: req.user
 	});
@@ -65,7 +64,7 @@ exports.messages_post_message = [
 		if (!errors.isEmpty()) {
 			const messages = await Message.find({}).populate('creator').exec();
 			res.render('message_form', {
-				title: 'messages',
+				title: 'POSTS',
 				messages: messages,
 				user: req.user,
 				text: req.body.text,

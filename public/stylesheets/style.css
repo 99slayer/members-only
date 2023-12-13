@@ -1,8 +1,123 @@
+* {
+	padding: 0px;
+	margin: 0px;
+	box-sizing: border-box;
+}
+
 body {
-  padding: 50px;
+	--primary-color: rgb(221, 221, 221);
+	--secondary-color: rgb(202, 202, 202);
+	--shadow-1: rgba(0, 0, 0, 0.4) 0px 2px 4px, rgba(0, 0, 0, 0.3) 0px 7px 13px -3px, rgba(0, 0, 0, 0.2) 0px -3px 0px inset;
+
+	height: 100vh;
+	padding: 0px 140px 0px 140px;
+	/* margin-left: 100px;
+	margin-right: 100px; */
   font: 14px "Lucida Grande", Helvetica, Arial, sans-serif;
 }
 
+#main{
+	height: 100%;
+	padding:10px 20px 10px 20px;
+	background-color: rgb(124, 197, 226);
+}
+
+li {
+	list-style: none;
+}
+
 a {
-  color: #00B7FF;
+	text-decoration: none;
+  color: black;
+}
+
+form {
+	padding: 6px;
+	border-radius: 3px;
+	align-items: flex-start;
+	background-color: var(--secondary-color);
+	box-shadow: var(--shadow-1);
+}
+
+button {
+	padding: 2px;
+	/* height: 20px;
+	min-width: 60px; */
+	font-size: 0.8em;
+}
+
+#page-header {
+	padding: 6px;
+	margin-bottom: 10px;
+	background-color: var(--secondary-color);
+	border-radius: 3px;
+	box-shadow: var(--shadow-1);
+}
+
+/* .form-group {
+
+}
+
+.form-control {
+
+} */
+
+#signin-form {
+	display: flex;
+	flex-direction: column;
+	gap: 6px;
+}
+
+#signup-btn {
+	display: flex;
+	flex-direction: column;
+	gap: 2px;
+}
+
+#msg-list {
+	display: flex;
+	flex-direction: column;
+	gap: 10px;
+}
+
+.msg-cont {
+	padding: 6px;
+	background-color: var(--primary-color);
+	border-radius: 3px;
+	box-shadow: var(--shadow-1);
+}
+
+.msg-info {
+	display: flex;
+	align-items: center;
+	gap: 10px;
+}
+
+.msg-user {
+	font-weight: 900;
+	font-size: 1.1em;
+}
+
+.msg-date {
+	font-size: 0.8em;
+}
+
+.msg-text {
+	font-size: 1em;
+}
+
+#user-list {
+	display: flex;
+	flex-direction: column;
+	align-items: flex-start;
+	gap: 6px;
+}
+
+.user {
+	min-width: 60px;
+	padding: 6px;
+	border-radius: 3px;
+	font-size: 1.2em;
+	background-color: var(--secondary-color);
+	box-shadow: var(--shadow-1);
 }

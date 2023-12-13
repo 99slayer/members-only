@@ -7,7 +7,7 @@ block content
 			a(href='/signout') Sign Out
 
 	else 
-		h2 Login
+		h2 SIGN IN
 		form(action='/' method='post' id='signin-form')
 			div(class='form-group')
 				label(for='username')
@@ -15,8 +15,9 @@ block content
 			div(class='form-group')
 				label(for='password')
 				input(type='text' class='form-control' placeholder='Password' name='password' value='')
-
 			button(type='submit') Sign In
 
-		button(type='button')
-			a(href='/user/create') Sign Up
+			div(id='signup-btn')
+				p(style='font-size: 0.8em;') Not signed up?
+				button(type='button')
+					a(href='/user/create') Sign Up

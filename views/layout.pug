@@ -4,11 +4,12 @@ html
 		title= title
 		link(rel='stylesheet', href='/stylesheets/style.css')
 	body
-		header(id='page-header')
-			a(href='/' style='text-decoration: none; margin-right: 20px;') LOGO
-			button(type='button')
-				a(href='/messages') POSTS
-			button(type='button')
-				a(href='/users') USERS
+		div(id='main')
+			header(id='page-header')
+				a(href='/' style='text-decoration: none; margin-right: 20px;') LOGO
+				button(type='button')
+					a(href='/messages') POSTS
+				button(type='button')
+					a(href='/users') USERS
 
-		block content
+			block content

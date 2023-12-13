@@ -3,8 +3,8 @@ extends layout
 block content 
 	h2= title 
 
-	ul 
+	ul(id='user-list')
 		each user in users 
-			li(style='display: flex; gap: 4px;')
-				a(href= user.url)= user.username
-				p= user.fullname
+			li(class='user' style='display: flex; gap: 4px;')
+				button(type='button')
+					a(href= user.url)= user.username

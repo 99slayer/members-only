@@ -5,17 +5,17 @@ const bcrypt = require('bcryptjs');
 
 exports.user_detail = asyncHandler(async (req, res, next) => {
 	const user = await User.findById(req.params.id).exec();
-	res.render('user_detail', { title: 'user detail', user: user });
+	res.render('user_detail', { user: user });
 });
 
 exports.user_list = asyncHandler(async (req, res, next) => {
 	const users = await User.find().exec();
 	console.log(users);
-	res.render('user_list', { title: 'Users', users: users });
+	res.render('user_list', { title: 'USERS', users: users });
 });
 
 exports.user_create_get = asyncHandler(async (req, res, next) => {
-	res.render('user_signup', { title: 'signup' });
+	res.render('user_signup', { title: 'SIGN UP' });
 });
 
 const innerWhitespace = (string) => {
@@ -88,7 +88,7 @@ exports.user_create_post = [
 
 			if (!errors.isEmpty()) {
 				res.render('user_signup', {
-					title: 'signup',
+					title: 'SIGN UP',
 					user: user,
 					errors: errors.array(),
 				});
