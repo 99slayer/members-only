@@ -10,7 +10,7 @@ html
 				a(href='/') HOME
 				a(href='/messages') POSTS
 				a(href='/users') USERS
-				if user && !signup
+				if locals.authCheck
 					a(href=user.url style='margin-left: auto;')= user.username
 
 			block content

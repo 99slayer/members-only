@@ -4,13 +4,20 @@ const { body, validationResult } = require('express-validator');
 const bcrypt = require('bcryptjs');
 
 exports.user_detail = asyncHandler(async (req, res, next) => {
-	const user = await User.findById(req.params.id).exec();
-	res.render('user_detail', { user: user });
+	const details = await User.findById(req.params.id).exec();
+	res.render('user_detail', {
+		user: req.user,
+		userDetails: details
+	});
 });
 
 exports.user_list = asyncHandler(async (req, res, next) => {
 	const users = await User.find().exec();
-	res.render('user_list', { title: 'USERS', users: users });
+	res.render('user_list', {
+		title: 'USERS',
+		user: req.user,
+		users: users
+	});
 });
 
 exports.user_create_get = asyncHandler(async (req, res, next) => {
@@ -91,7 +98,6 @@ exports.user_create_post = [
 				res.render('user_signup', {
 					title: 'SIGN UP',
 					user: user,
-					signup: 'signup',
 					errors: errors.array(),
 				});
 				return;

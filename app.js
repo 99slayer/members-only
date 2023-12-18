@@ -44,6 +44,15 @@ app.use(express.urlencoded({ extended: false }));
 app.use(cookieParser());
 app.use(express.static(path.join(__dirname, 'public')));
 
+// Adds a value to the locals object if a user is logged in.
+app.use(function (req, res, next) {
+	if (req.session.passport) {
+		res.locals.authCheck = true;
+	}
+
+	next();
+});
+
 app.use('/', indexRouter);
 
 // catch 404 and forward to error handler
