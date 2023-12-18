@@ -22,5 +22,6 @@ router.get('/messages', messageController.message_list);
 
 router.post('/messages/password', messageController.messages_post_pass);
 router.post('/messages/message', messageController.messages_post_message);
+router.post('/messages/delete', messageController.messages_delete_message);
 
 module.exports = router;

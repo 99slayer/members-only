@@ -1,10 +1,9 @@
 extends layout 
 
 block content 
-	h2= title 
+	h2(class='page-title')= title 
 
 	ul(id='user-list')
 		each user in users 
 			li(class='user' style='display: flex; gap: 4px;')
-				button(type='button')
-					a(href= user.url)= user.username
+				a(href= user.url)= user.username

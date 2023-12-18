@@ -1,23 +1,40 @@
 extends layout
 
 block content
-
 	if user
-		button(type='button')
-			a(href='/signout') Sign Out
+		h2(class='page-title') SIGN OUT
+		a(href='/signout' style='margin-top: 6px;') Sign Out
 
 	else 
-		h2 SIGN IN
+		h2(class='page-title') SIGN IN
 		form(action='/' method='post' id='signin-form')
 			div(class='form-group')
-				label(for='username')
-				input(type='text' class='form-control' placeholder='Username' name='username' value='')
+				label(for='username') USERNAME
+				input(
+					type='text'
+					class='form-control'
+					placeholder='Username'
+					name='username'
+					value=(messages.username != undefined ? messages.username[0] : '')
+					title='Username'
+				)
 			div(class='form-group')
-				label(for='password')
-				input(type='text' class='form-control' placeholder='Password' name='password' value='')
+				label(for='password') PASSWORD
+				input(
+					type='text'
+					class='form-control'
+					placeholder='Password'
+					name='password'
+					value=''
+					title='Password'
+				)
+				if messages.error
+					ul(class='error-list')
+						li(class='error')= messages.error
+
 			button(type='submit') Sign In
 
-			div(id='signup-btn')
+			div(id='index-signup')
 				p(style='font-size: 0.8em;') Not signed up?
-				button(type='button')
-					a(href='/user/create') Sign Up
+				a(href='/user/create') Sign Up
+				

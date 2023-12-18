@@ -31,7 +31,7 @@ exports.messages_post_pass = [
 		if (!errors.isEmpty()) {
 			const messages = await Message.find({}).populate('creator').exec();
 			res.render('message_form', {
-				title: 'messages',
+				title: 'POSTS',
 				messages: messages,
 				user: req.user,
 				errors: errors.array()
@@ -76,3 +76,8 @@ exports.messages_post_message = [
 		}
 	})
 ];
+
+exports.messages_delete_message = asyncHandler(async (req, res, next) => {
+	await Message.findByIdAndDelete(req.body.messageid);
+	res.redirect('/messages');
+});

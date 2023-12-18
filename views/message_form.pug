@@ -2,17 +2,13 @@ extends message_list
 
 block form
 	if !user
-		p You are not signed up.
-	else if !user.membership_status
-		form(action='/messages/password' method='post' id='secret-password-form') 
-			div(class='form-group')
-				label(for='secret-password') 
-				input(type='text' class='form-control' name='secret-password' placeholder='Secret Placeholder' required)
-
-			button(type='submit') Submit
-
+		p You are not signed in.
 	else 
-		form(action='/messages/message' method='post' id='message-form')
+		form(
+			action='/messages/message'
+			method='post'
+			id='message-form'
+		)
 			div(class='form-group')
 				label(for='text')
 				textarea(
@@ -22,11 +18,35 @@ block form
 					style='width: 100%; padding: 4px; resize: none;'
 					rows='8'
 					value=(undefined === text ? '' : text)
+					required
 				)
+				if errors
+					ul(class='error-list')
+						each error in errors 
+							if error.path === 'text'
+								li(class='error')= error.msg
 
 			button(type='submit') SEND
 
-	if errors 
-		ul 
-			each error in errors 
-				li= error.msg 
+		if !user.membership_status
+			form(
+				action='/messages/password'
+				method='post'
+				id='secret-password-form'
+			)
+				div(class=`${errors ? 'invalid-input' : ''} form-group` style='padding: 4px;')
+					label(for='secret-password') Become a club member!
+					div(style='display: flex; gap: 2px;')
+						input(
+							type='text'
+							class='form-control'
+							name='secret-password'
+							placeholder='Secret Password'
+							required
+						)
+						button(type='submit' style='margin: 0px;') Submit
+					if errors 
+						ul(class='error-list')
+							each error in errors
+								if error.path === 'secret-password'
+									li(class='error')= error.msg 

@@ -1,7 +1,7 @@
 extends layout 
 
 block content
-	h2= title
+	h2(class='page-title')= title
 	ul(id='msg-list')
 		each message in messages
 			li(class='msg-cont')
@@ -9,6 +9,19 @@ block content
 					div(class='msg-info')
 						a(href= message.creator.url class='msg-user')= message.creator.username
 						p(class='msg-date')= message['creation_date_formatted']
+						if user.admin 
+							form(
+								action='/messages/delete'
+								method='POST'
+								class='delete-form'
+							)
+								input(
+									type='hidden'
+									name='messageid'
+									required='true'
+									value= message._id
+								)
+								button(type='submit' class='delete-btn') X
 				p(class='msg-text')= message.text
 
 		block form

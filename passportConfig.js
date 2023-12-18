@@ -7,14 +7,14 @@ function initialize(passport) {
 		const user = await User.findOne({ username: username }).exec();
 
 		if (user === null) {
-			return done(null, false);
+			return done(null, false, { message: 'User does not exist.' });
 		}
 
 		try {
 			if (await bcrypt.compare(password, user.password)) {
 				return done(null, user);
 			} else {
-				return done(null, false);
+				return done(null, false, { message: 'Incorrect password.' });
 			}
 		} catch (error) {
 			return done(error);

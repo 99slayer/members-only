@@ -4,12 +4,13 @@ html
 		title= title
 		link(rel='stylesheet', href='/stylesheets/style.css')
 	body
+		//- - console.log(locals)
 		div(id='main')
 			header(id='page-header')
-				a(href='/' style='text-decoration: none; margin-right: 20px;') LOGO
-				button(type='button')
-					a(href='/messages') POSTS
-				button(type='button')
-					a(href='/users') USERS
+				a(href='/') HOME
+				a(href='/messages') POSTS
+				a(href='/users') USERS
+				if user && !signup
+					a(href=user.url style='margin-left: auto;')= user.username
 
 			block content

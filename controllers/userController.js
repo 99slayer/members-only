@@ -10,7 +10,6 @@ exports.user_detail = asyncHandler(async (req, res, next) => {
 
 exports.user_list = asyncHandler(async (req, res, next) => {
 	const users = await User.find().exec();
-	console.log(users);
 	res.render('user_list', { title: 'USERS', users: users });
 });
 
@@ -20,7 +19,7 @@ exports.user_create_get = asyncHandler(async (req, res, next) => {
 
 const innerWhitespace = (string) => {
 	if (/\s/.test(string)) {
-		throw new Error('There must not be any spaces in ' + string);
+		throw new Error('There must not be any inner whitespace.');
 	}
 
 	return true;
@@ -78,6 +77,8 @@ exports.user_create_post = [
 	asyncHandler(async (req, res, next) => {
 		const errors = validationResult(req);
 
+		console.log(errors.array());
+
 		bcrypt.hash(req.body.password, 10, async (err, hashedPswd) => {
 			const user = new User({
 				firstname: req.body.firstname,
@@ -90,6 +91,7 @@ exports.user_create_post = [
 				res.render('user_signup', {
 					title: 'SIGN UP',
 					user: user,
+					signup: 'signup',
 					errors: errors.array(),
 				});
 				return;
@@ -101,7 +103,8 @@ exports.user_create_post = [
 					if (err) {
 						return next(err);
 					}
-					return res.redirect(user.url);
+
+					return res.redirect('/messages');
 				});
 			}
 		});

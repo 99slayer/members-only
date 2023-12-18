@@ -2,20 +2,27 @@ extends layout
 
 block content
 
-	h2= title
+	h2(class='page-title')= title
 	form(action='' method='post' id='signup-form')
-		div(class='form-group')
-			label(for='firstname')
+		div(class=`${errors && errors.find(error => error.path == 'firstname') ? 'invalid-input' : ''} form-group`)
+			label(for='firstname') FIRST NAME
 			input(
 				type='text'
 				class='form-control'
+				id='text-element'
 				placeholder='First Name'
 				name='firstname'
 				value=(undefined === user ? '' : user.firstname)
 				required
+				title='First Name'
 			)
-		div(class='form-group')
-			label(for='lastname')
+			if errors && errors.find(error => error.path == 'firstname')
+				ul(class='error-list')
+					each error in errors 
+						if error.path == 'firstname'
+							li(class='error')= error.msg
+		div(class=`${errors && errors.find(error => error.path == 'lastname') ? 'invalid-input' : ''} form-group`)
+			label(for='lastname') LAST NAME
 			input(
 				type='text'
 				class='form-control'
@@ -23,9 +30,15 @@ block content
 				name='lastname'
 				value=(undefined === user ? '' : user.lastname)
 				required
+				title='Last Name'
 			)
-		div(class='form-group')
-			label(for='username')
+			if errors && errors.find(error => error.path == 'lastname')
+				ul(class='error-list') 
+					each error in errors 
+						if error.path == 'lastname'
+							li(class='error')= error.msg
+		div(class=`${errors && errors.find(error => error.path == 'username') ? 'invalid-input' : ''} form-group`)
+			label(for='username') USERNAME
 			input(
 				type='text'
 				class='form-control'
@@ -33,9 +46,15 @@ block content
 				name='username'
 				value=(undefined === user ? '' : user.username)
 				required
+				title='Username'
 			)
-		div(class='form-group')
-			label(for='password')
+			if errors && errors.find(error => error.path == 'username')
+				ul(class='error-list')
+					each error in errors 
+						if error.path == 'username'
+							li(class='error')= error.msg
+		div(class=`${errors && errors.find(error => error.path == 'password') ? 'invalid-input' : ''} form-group`)
+			label(for='password') PASSWORD
 			input(
 				type='text'
 				class='form-control'
@@ -43,22 +62,28 @@ block content
 				name='password'
 				value=(undefined === user ? '' : user.password)
 				required
+				title='Password'
 			)
-		div(class='form-group')
-			label(for='password-confirm')
+			if errors && errors.find(error => error.path == 'password')
+				ul(class='error-list')
+					each error in errors 
+						if error.path == 'password'
+							li(class='error')= error.msg
+		div(class=`${errors && errors.find(error => error.path == 'password-confirm') ? 'invalid-input' : ''} form-group`)
+			label(for='password-confirm') PASSWORD CONFIRM
 			input(
 				type='text'
 				class='form-control'
-				placeholder='Confirm Password'
+				placeholder='Password Confirm'
 				name='password-confirm'
 				value=''
 				required
+				title='Password Confirm'
 			)
+			if errors && errors.find(error => error.path == 'password-confirm')
+				ul(class='error-list')
+					each error in errors 
+						if error.path == 'password-confirm'
+							li(class='error')= error.msg
 			
 		button(type='submit') Sign Up
-
-	if errors
-		br
-		ul
-			for error in errors
-				li!= `${error.path}: ${error.msg}`
