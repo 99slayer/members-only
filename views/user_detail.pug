@@ -2,4 +2,5 @@ extends layout
 
 block content 
 	h2(class='page-title')= userDetails.username
-	p= 'name: ' + userDetails.fullname
+	div(id='user-details')
+		p= 'name: ' + userDetails.fullname

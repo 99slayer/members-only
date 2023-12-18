@@ -3,7 +3,7 @@ extends layout
 block content
 	if user
 		h2(class='page-title') SIGN OUT
-		a(href='/signout' style='margin-top: 6px;') Sign Out
+		a(href='/signout' style='margin-top: 6px;') SIGN OUT
 
 	else 
 		h2(class='page-title') SIGN IN
@@ -21,7 +21,7 @@ block content
 			div(class='form-group')
 				label(for='password') PASSWORD
 				input(
-					type='text'
+					type='password'
 					class='form-control'
 					placeholder='Password'
 					name='password'
@@ -32,9 +32,9 @@ block content
 					ul(class='error-list')
 						li(class='error')= messages.error
 
-			button(type='submit') Sign In
+			button(type='submit') SIGN IN
 
 			div(id='index-signup')
-				p(style='font-size: 0.8em;') Not signed up?
-				a(href='/user/create') Sign Up
+				p(style='margin-left: 6px; font-size: 0.8em;') Not signed up?
+				a(href='/user/create') SIGN UP
 				

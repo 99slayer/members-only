@@ -56,7 +56,7 @@ block content
 		div(class=`${errors && errors.find(error => error.path == 'password') ? 'invalid-input' : ''} form-group`)
 			label(for='password') PASSWORD
 			input(
-				type='text'
+				type='password'
 				class='form-control'
 				placeholder='Password'
 				name='password'
@@ -72,7 +72,7 @@ block content
 		div(class=`${errors && errors.find(error => error.path == 'password-confirm') ? 'invalid-input' : ''} form-group`)
 			label(for='password-confirm') PASSWORD CONFIRM
 			input(
-				type='text'
+				type='password'
 				class='form-control'
 				placeholder='Password Confirm'
 				name='password-confirm'
@@ -86,4 +86,4 @@ block content
 						if error.path == 'password-confirm'
 							li(class='error')= error.msg
 			
-		button(type='submit') Sign Up
+		button(type='submit') SIGN UP
