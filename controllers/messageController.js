@@ -53,7 +53,6 @@ exports.messages_post_message = [
 
 	asyncHandler(async (req, res, next) => {
 		const errors = validationResult(req);
-		console.log(errors.array());
 
 		const message = new Message({
 			timestamp: new Date(),

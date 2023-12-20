@@ -14,6 +14,6 @@ html
 				a(href='/messages') POSTS
 				a(href='/users') USERS
 				if locals.authCheck
-					a(href=user.url style='margin-left: auto;')= user.username
+					a(href=user.url style='margin-left: auto;')!= user.username
 
 			block content

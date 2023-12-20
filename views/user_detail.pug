@@ -1,6 +1,6 @@
 extends layout 
 
 block content 
-	h2(class='page-title')= userDetails.username
+	h2(class='page-title')!= userDetails.username
 	div(id='user-details')
-		p= 'name: ' + userDetails.fullname
+		p!= 'name: ' + userDetails.fullname

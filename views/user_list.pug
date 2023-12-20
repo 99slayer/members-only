@@ -7,4 +7,4 @@ block content
 	ul(id='user-list')
 		each user in users 
 			li(class='user' style='display: flex; gap: 4px;')
-				a(href= user.url)= user.username
+				a(href= user.url)!= user.username

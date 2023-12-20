@@ -2,6 +2,7 @@ const User = require('../models/user');
 const asyncHandler = require('express-async-handler');
 const { body, validationResult } = require('express-validator');
 const bcrypt = require('bcryptjs');
+const { decode } = require('html-entities');
 
 exports.user_detail = asyncHandler(async (req, res, next) => {
 	const details = await User.findById(req.params.id).exec();
@@ -84,8 +85,6 @@ exports.user_create_post = [
 	asyncHandler(async (req, res, next) => {
 		const errors = validationResult(req);
 
-		console.log(errors.array());
-
 		bcrypt.hash(req.body.password, 10, async (err, hashedPswd) => {
 			const user = new User({
 				firstname: req.body.firstname,
@@ -94,10 +93,17 @@ exports.user_create_post = [
 				password: req.body.password
 			});
 
+			const userFail = new User({
+				firstname: decode(req.body.firstname),
+				lastname: decode(req.body.lastname),
+				username: decode(req.body.username),
+				password: decode(req.body.password)
+			});
+
 			if (!errors.isEmpty()) {
 				res.render('user_signup', {
 					title: 'SIGN UP',
-					user: user,
+					user: userFail,
 					errors: errors.array(),
 				});
 				return;

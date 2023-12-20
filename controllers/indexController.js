@@ -1,13 +1,10 @@
 const asyncHandler = require('express-async-handler');
 const passport = require('passport');
-const { body, validationResult } = require('express-validator');
+const { body } = require('express-validator');
+const { decode } = require('html-entities');
 
 exports.index = asyncHandler(async (req, res, next) => {
-	if (req.isAuthenticated()) {
-		res.render('index', { title: 'Home Page', user: req.user });
-	} else {
-		res.render('index', { title: 'Home Page' });
-	}
+	res.render('index', { title: 'Home Page', user: req.user });
 });
 
 exports.sign_in = [
@@ -25,7 +22,7 @@ exports.sign_in = [
 					req.flash('error', info.message);
 				}
 
-				req.flash('username', req.body.username);
+				req.flash('username', decode(req.body.username));
 				return res.redirect('/');
 			}
 

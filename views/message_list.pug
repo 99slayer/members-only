@@ -7,7 +7,7 @@ block content
 			li(class='msg-cont')
 				if user && user['membership_status']
 					div(class='msg-info')
-						a(href= message.creator.url class='msg-user')= message.creator.username
+						a(href= message.creator.url class='msg-user')!= message.creator.username
 						p(class='msg-date')= message['creation_date_formatted']
 						if user.admin 
 							form(
@@ -22,6 +22,6 @@ block content
 									value= message._id
 								)
 								button(type='submit' class='delete-btn') X
-				p(class='msg-text')= message.text
+				p(class='msg-text')!= message.text
 
 		block form
