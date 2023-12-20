@@ -1,7 +1,7 @@
 extends layout
 
 block content
-	if user
+	if locals.authCheck
 		h2(class='page-title') SIGN OUT
 		a(href='/signout' style='margin-top: 6px;') SIGN OUT
 
