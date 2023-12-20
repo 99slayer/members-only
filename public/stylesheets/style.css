@@ -5,7 +5,7 @@
 }
 
 body {
-	--primary-color: rgb(221, 221, 221);
+	--primary-color: rgb(235, 235, 235);
 	--secondary-color: rgb(194, 194, 194);
 	--shadow-1: rgba(0, 0, 0, 0.12) 0px 1px 3px, rgba(0, 0, 0, 0.24) 0px 1px 2px;
 
@@ -216,7 +216,8 @@ a:focus, button:focus {
 .msg-text {
 	margin-left: 4px;
 	font-size: 1em;
-	word-break:break-all;
+	white-space: pre-wrap;
+	word-wrap: break-word;
 }
 
 .delete-form {

@@ -16,7 +16,7 @@ const app = express();
 // Set up mongoose connection
 const mongoose = require('mongoose');
 mongoose.set('strictQuery', false);
-const mongoDB = process.env.TEST_DB_STRING;
+const mongoDB = process.env.TEST_DB_STRING || process.env.PROD_DB_STRING;
 
 main().catch((err) => console.log(err));
 async function main() {
